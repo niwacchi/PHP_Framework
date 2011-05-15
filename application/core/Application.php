@@ -17,7 +17,7 @@ abstract class Application
     
     protected function setDebugMode($debug)
     {
-        id($debug){
+        if($debug){
             $this->debug = true;
             ini_set('display_errors',1);
             error_reporting(-1);
@@ -33,7 +33,7 @@ abstract class Application
         $this->response = new Response();
         $this->session = new Session();
         $this->db_manager = new DbManager();
-        $this->router = new Router($this->regsterRoutes());
+        $this->router = new Router($this->registerRoutes());
     }
     
     protected function configure()
@@ -106,7 +106,7 @@ abstract class Application
         $this->response->send();
     }
     
-    public function runAction($controller_name.,$action,$params = array())
+    public function runAction($controller_name,$action,$params = array())
     {
         $controller_class = ucfirst($controller_name) . 'Controller';
         
@@ -139,7 +139,7 @@ abstract class Application
     protected function render404Page($e)
     {
         $this->response->setStatusCode(404,'Not Found');
-        $message = $this->isDebugMode() ? $->getMessage() : 'Page not found.';
+        $message = $this->isDebugMode() ? $this->getMessage() : 'Page not found.';
         $message = htmlspecialchars($message,ENT_QUOTES,'UTF-8');
         
         $this->response->setContent(<<<EOF

@@ -8,7 +8,7 @@ class Router
         $this->routes = $this->compileRoutes($definitions);
     }
     
-    public function compileRoutes($definition)
+    public function compileRoutes($definitions)
     {
         $routes = array();
         

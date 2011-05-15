@@ -40,8 +40,8 @@ abstract class Controller
 
     protected function needsAuthentication($action)
     {
-        if($this->auth_actions === true)
-          || (is_array($this->auth_actions) && in_array($action,$this->auth_actions))
+        if(($this->auth_actions === true)
+          || (is_array($this->auth_actions) && in_array($action,$this->auth_actions)))
         {
             return true;          
         }
